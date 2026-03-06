@@ -1,0 +1,3 @@
+## This repository contains SQL Pratice Problems from...
+
+1. https://leetcode.com/problem-list/database/ 
