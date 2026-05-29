@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  spark:
+    image: apache/spark:3.5.1
+    container_name: spark-local
+    ports:
+      - "4040:4040"
+      - "8080:8080"
+    volumes:
+      - ./app:/opt/spark-apps
+    working_dir: /opt/spark-apps
+    stdin_open: true
+    tty: true
+    command: bash
