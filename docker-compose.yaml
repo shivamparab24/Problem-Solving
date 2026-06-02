@@ -1,6 +1,7 @@
-version: "3.8"
+# version: "3.9"
 
 services:
+
   spark:
     image: apache/spark:3.5.1
     container_name: spark-local
@@ -12,4 +13,25 @@ services:
     working_dir: /opt/spark-apps
     stdin_open: true
     tty: true
-    command: bash
+    command: [ "bash", "-c", "tail -f /dev/null" ]
+    restart: "no"
+    depends_on:
+      - postgres
+
+
+  postgres:
+    image: postgres:13
+    container_name: practice_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: company_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./DB_setup:/docker-entrypoint-initdb.d
+    restart: "no"
+
+volumes:
+  postgres_data:
